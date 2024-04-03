@@ -45,6 +45,7 @@ class DetailFragment : Fragment() {
         binding.movieStar.text = movie?.voteAverage.toString()
         binding.movieSummary.text = movie?.overview
         binding.movieRelease.text = movie?.releaseDate
+        binding.moviebisey.text = movie?.originalLanguage
 
         binding.backImageView.setOnClickListener {
             // NavController'ü alın
