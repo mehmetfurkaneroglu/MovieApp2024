@@ -1,4 +1,4 @@
-package com.eroglu.movieapp.view.menu
+package com.eroglu.movieapp.view.tvSeries
 
 import android.os.Bundle
 import android.view.LayoutInflater

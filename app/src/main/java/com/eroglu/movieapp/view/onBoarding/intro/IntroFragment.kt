@@ -1,4 +1,4 @@
-package com.eroglu.movieapp.view.intro
+package com.eroglu.movieapp.view.onBoarding.intro
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -38,12 +38,10 @@ class IntroFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.getStartedButton.setOnClickListener{
-            val action = IntroFragmentDirections.actionIntroFragmentToLoginFragment() // XXFragmentDirections hazır oluşturuluyor. Action da hazır
+            val action =
+                IntroFragmentDirections.actionIntroFragmentToLoginFragment() // XXFragmentDirections hazır oluşturuluyor. Action da hazır
             Navigation.findNavController(it).navigate(action) //navigasyon. it =hangi nav controller içinde olucam. navigate  nereye gideceğimi söylüyorum (navigate= oraya doğru git) burayada aksiyonumu veriyorum
         }
-
-
-
     }
 
     override fun onDestroyView() {

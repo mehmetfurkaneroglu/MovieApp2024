@@ -15,7 +15,7 @@ interface ItemClickedListener{
     fun onItemClicked(item: MovieResult)
 }
 
-class PopularMoviesAdapter: RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder>() {
+class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     var itemClickedListener: ItemClickedListener? = null
 
@@ -29,7 +29,7 @@ class PopularMoviesAdapter: RecyclerView.Adapter<PopularMoviesAdapter.ViewHolder
             oldItem == newItem
     }
 
-    val listDiffer = AsyncListDiffer(this,difUtil)
+    private val listDiffer = AsyncListDiffer(this,difUtil)
 
     var list : List<MovieResult?>
         get() = listDiffer.currentList

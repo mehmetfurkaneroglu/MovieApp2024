@@ -2,13 +2,10 @@ package com.eroglu.movieapp.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commit
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.ActivityMainBinding
-import com.eroglu.movieapp.view.main.MainFragment
-import com.eroglu.movieapp.view.menu.FavoriteFragment
-import com.eroglu.movieapp.view.menu.ProfileFragment
-import com.eroglu.movieapp.view.menu.TvSeriesFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,35 +18,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // BottomNavigationView'dan seçilen öğeleri dinleme
-        binding.bottomNavBar.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.moviesFragment -> {
-                    supportFragmentManager.commit {
-                        replace(R.id.fragmentContainerView, MainFragment())
-                    }
-                    true
-                }
-                R.id.tvSeriesFragment -> {
-                    supportFragmentManager.commit {
-                        replace(R.id.fragmentContainerView, TvSeriesFragment())
-                    }
-                    true
-                }
-                R.id.favoriteFragment -> {
-                    supportFragmentManager.commit {
-                        replace(R.id.fragmentContainerView, FavoriteFragment())
-                    }
-                    true
-                }
-                R.id.profileFragment -> {
-                    supportFragmentManager.commit {
-                        replace(R.id.fragmentContainerView, ProfileFragment())
-                    }
-                    true
-                }
-                else -> false
-            }
-        }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        setupWithNavController(binding.bottomNavBar,navController)
+
     }
 }

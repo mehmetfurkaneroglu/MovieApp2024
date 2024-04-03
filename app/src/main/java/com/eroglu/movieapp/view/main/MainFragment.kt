@@ -1,6 +1,8 @@
 package com.eroglu.movieapp.view.main
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.FragmentMainBinding
+import com.eroglu.movieapp.model.MovieResult
+import com.eroglu.movieapp.util.Keys
+import com.eroglu.movieapp.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
-    val viewModel : MainViewModel by viewModels()
+    private val viewModel: MainViewModel by viewModels()
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
@@ -24,127 +29,79 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_main, container, false)
+    ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
-        binding.setVariable(BR.viewModel,viewModel)
+        binding.setVariable(BR.viewModel, viewModel)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //viewModel.getPopularMovies()
-        //observe()
         observe()
-
     }
-/*
-    fun observe(){
-        viewModel.selectedPopularMovie.observe(viewLifecycleOwner, Observer { selectedPopularMovie ->
-            when(selectedPopularMovie) {
+
+    private fun observe() {
+        viewModel.popularMoviesList.observe(viewLifecycleOwner) { movieList ->
+            when (movieList) {
                 is Resource.Success -> {
-                    hideProgressBar()
-                    (selectedPopularMovie.data as? MovieResult)?.let { movie ->
-                        val bundle = Bundle().apply {
-                            putSerializable("key", movie)
-                        }
-
-                        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
-                            .navigate(R.id.action_mainFragment_to_detailFragment, bundle)
-                    }
-
+                    binding.popularMoviesProgressBar.visibility = View.GONE
+//                        movieList.data?.results?.let {
+////                            (binding.bestMoviesRecyclerView.adapter as MoviesAdapter).list = it
+//                            viewModel.moviesAdapter.list = it
+//                        }
                 }
                 is Resource.Error -> {
-                    hideProgressBar()
-                    (selectedPopularMovie.message as? String)?.let { message ->
-                        Log.e(TAG, "An error occurred: $message")
+                    binding.popularMoviesProgressBar.visibility = View.GONE
+                    movieList.message?.let { message ->
+                        Log.e(TAG, "An error occured: $message")
                     }
                 }
                 is Resource.Loading -> {
-                    showProgressBar()
+                    binding.popularMoviesProgressBar.visibility = View.VISIBLE
                 }
             }
-        })
-    }
-
- */
-
-
-    /*
-        fun observe(){
-            viewModel.selectedPopularMovie.observe(viewLifecycleOwner, Observer { selectedPopularMovie ->
-                when(selectedPopularMovie) {
-                    is Resource.Success -> {
-                        hideProgressBar()
-                        selectedPopularMovie.data?.let { movie ->
-                                val bundle = Bundle().apply {
-                                    putSerializable("key",movie)
-                                }
-
-                                Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
-                                    .navigate(R.id.action_mainFragment_to_detailFragment,bundle)
-                            }
-
-                        }
-                    is Resource.Error -> {
-                        hideProgressBar()
-                        selectedPopularMovie.message?.let { message->
-                            Log.e(TAG, "An error occured: $message")
-                        }
-                    }
-                    is Resource.Loading -> {
-                        showProgressBar()
-                    }
-                }
-                })
         }
 
-     */
-
-    private fun hideProgressBar() {
-        binding.progressBar.visibility = View.GONE
-        binding.progressBar2.visibility = View.GONE
-        binding.progressBar3.visibility = View.GONE
-        isLoading = false
-    }
-
-    private fun showProgressBar() {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.progressBar2.visibility = View.VISIBLE
-        binding.progressBar3.visibility = View.VISIBLE
-        isLoading = true
-    }
-
-
-    var isLoading = false
-
-
-
-// bu aşağıdaki kodda progress bar hep duruyor
-
-    fun observe(){
-        viewModel.selectedPopularMovie.observe(viewLifecycleOwner){ selectedPopularMovie ->
-            selectedPopularMovie?.let { movie ->
-                val bundle = Bundle().apply {
-                    putSerializable("key",movie)
+        viewModel.upcomingMoviesList.observe(viewLifecycleOwner) { movieList ->
+            when (movieList) {
+                is Resource.Success -> {
+                    binding.upcomingMoviesProgressBar.visibility = View.GONE
                 }
-
-
-
-                Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
-                    .navigate(R.id.action_mainFragment_to_detailFragment,bundle)
+                is Resource.Error -> {
+                    binding.upcomingMoviesProgressBar.visibility = View.GONE
+                    movieList.message?.let { message ->
+                        Log.e(TAG, "An error occured: $message")
+                    }
+                }
+                is Resource.Loading -> {
+                    binding.upcomingMoviesProgressBar.visibility = View.VISIBLE
+                }
             }
-
         }
-        binding.progressBar.visibility = View.GONE
-        binding.progressBar3.visibility = View.GONE
+
+        viewModel.selectedPopularMovie.observe(viewLifecycleOwner){movie ->
+            movie.let {
+                navigateToMovieDetail(it)
+            }
+        }
+
+        viewModel.selectedUpcommingMovie.observe(viewLifecycleOwner){movie ->
+            movie.let {
+                navigateToMovieDetail(it)
+            }
+        }
     }
 
+    private fun navigateToMovieDetail(movie: MovieResult){
+        val bundle = Bundle().apply {
+            putSerializable(Keys.MOVIE_DETAIL_KEY,movie)
+        }
 
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
+            .navigate(R.id.action_mainFragment_to_detailFragment,bundle)
+    }
 
-    /*
+       /*
     xmlden adapterı verdik
     private fun observer(){
         viewModel.popularMoviesList.observe(viewLifecycleOwner) {

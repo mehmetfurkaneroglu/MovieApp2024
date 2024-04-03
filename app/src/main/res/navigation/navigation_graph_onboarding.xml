@@ -6,7 +6,7 @@
     app:startDestination="@id/introFragment">
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.eroglu.movieapp.view.intro.IntroFragment"
+        android:name="com.eroglu.movieapp.view.onBoarding.intro.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.eroglu.movieapp.view.login.LoginFragment"
+        android:name="com.eroglu.movieapp.view.onBoarding.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login"/>
 </navigation>

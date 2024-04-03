@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.eroglu.movieapp.databinding.FragmentDetailBinding
 import com.eroglu.movieapp.model.MovieResult
 import com.eroglu.movieapp.util.Constants.BASE_IMG_URL
+import com.eroglu.movieapp.util.Keys
 import com.eroglu.movieapp.util.getMSerializable
 
 
@@ -22,7 +23,7 @@ class DetailFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        movie = arguments?.getMSerializable("key",MovieResult::class.java)
+        movie = arguments?.getMSerializable(Keys.MOVIE_DETAIL_KEY,MovieResult::class.java)
     }
 
     override fun onCreateView(

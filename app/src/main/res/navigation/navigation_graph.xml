@@ -29,22 +29,17 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.eroglu.movieapp.view.menu.FavoriteFragment"
+        android:name="com.eroglu.movieapp.view.favorite.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
-        android:id="@+id/moviesFragment"
-        android:name="com.eroglu.movieapp.view.menu.MoviesFragment"
-        android:label="fragment_movies"
-        tools:layout="@layout/fragment_movies" />
-    <fragment
         android:id="@+id/profileFragment"
-        android:name="com.eroglu.movieapp.view.menu.ProfileFragment"
+        android:name="com.eroglu.movieapp.view.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/tvSeriesFragment"
-        android:name="com.eroglu.movieapp.view.menu.TvSeriesFragment"
+        android:name="com.eroglu.movieapp.view.tvSeries.TvSeriesFragment"
         android:label="fragment_tv_series"
         tools:layout="@layout/fragment_tv_series" />
 </navigation>

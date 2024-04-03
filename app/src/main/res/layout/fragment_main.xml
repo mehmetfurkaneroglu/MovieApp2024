@@ -81,7 +81,7 @@
                         android:paddingStart="12dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:paddingEnd="12dp"
-                        android:adapter="@{viewModel.popularMoviesAdapter}"
+                        android:adapter="@{viewModel.moviesAdapter}"
                         tools:listitem="@layout/popular_movies_item"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -92,10 +92,11 @@
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <ProgressBar
-                        android:id="@+id/progressBar"
+                        android:id="@+id/popularMoviesProgressBar"
                         style="?android:attr/progressBarStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@+id/bestMoviesRecyclerView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -178,10 +179,11 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <ProgressBar
-                        android:id="@+id/progressBar3"
+                        android:id="@+id/upcomingMoviesProgressBar"
                         style="?android:attr/progressBarStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="@id/upcommingRecyclerView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
