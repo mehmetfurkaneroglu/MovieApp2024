@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1064000386084",
+    "project_id": "moviesapp-91962",
+    "storage_bucket": "moviesapp-91962.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064000386084:android:94c5d2c0a249e2e93214b1",
+        "android_client_info": {
+          "package_name": "com.eroglu.movieapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCt0VUzyo_x78fEKsXdPUqLV4Sacoy4mDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
