@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="viewModel"
             type="com.eroglu.movieapp.view.main.MainViewModel" />
@@ -96,7 +97,7 @@
                         style="?android:attr/progressBarStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="@{viewModel.isPopularLoading? View.VISIBLE : View.GONE}"
                         app:layout_constraintBottom_toBottomOf="@+id/bestMoviesRecyclerView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -183,7 +184,7 @@
                         style="?android:attr/progressBarStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:visibility="@{viewModel.isUpcomingMovies? View.VISIBLE : View.GONE}"
                         app:layout_constraintBottom_toBottomOf="@id/upcommingRecyclerView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
