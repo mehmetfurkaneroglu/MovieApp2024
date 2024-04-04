@@ -13,11 +13,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val repository: Repository): ViewModel() {
 
     var isPopularLoading: Boolean = false
-    var isUpcomingMovies: Boolean = false
-
-// bunları observe ile liste gelip gelmediğini kontrol ederken kullanıyorduk. Onun yerine Data Binding ile yaptık.
-//    val popularMoviesList = SingleLiveEvent<Resource<PopularMovies>>()
-//    val upcomingMoviesList = SingleLiveEvent<Resource<UpcommingMovies>>()
+    var isUpcomingLoading: Boolean = false
 
     val selectedPopularMovie = SingleLiveEvent<MovieResult>()
     val selectedUpcommingMovie = SingleLiveEvent<MovieResult>()
@@ -45,24 +41,16 @@ class MainViewModel @Inject constructor(private val repository: Repository): Vie
 
     private fun getPopularMovies(){
         viewModelScope.launch {
-            //popularMoviesList.postValue(Resource.Loading())
             isPopularLoading = true
-            //delay(5000)
             val result = repository.getPopularMovies()
 
             if (result.isSuccessful){
                 result.body()?.let {
-                    //isPopularLoading = false eğer sonuç var ise progress barı kapat
-                    //popularMoviesList.postValue(Resource.Success(it))
                     it.results?.let {
                         moviesAdapter.list = it
                     }
-                }//?:kotlin.run {
-                    //popularMoviesList.postValue(Resource.Error("List Null"))
-                //}
-            }//else{
-//                popularMoviesList.postValue(Resource.Error("Call Not Successful"))
-//            }
+                }
+            }
             isPopularLoading = false
         }
     }
@@ -70,7 +58,7 @@ class MainViewModel @Inject constructor(private val repository: Repository): Vie
     private fun getUpcomingMovies(){
         viewModelScope.launch {
 //            upcomingMoviesList.postValue(Resource.Loading())
-            isUpcomingMovies = true
+            isUpcomingLoading = true
 
             val result = repository.getUpcomingMovies()
 
@@ -87,7 +75,7 @@ class MainViewModel @Inject constructor(private val repository: Repository): Vie
             }//else{
 //                upcomingMoviesList.postValue(Resource.Error("Call Not Successful"))
 //            }
-            isUpcomingMovies = false
+            isUpcomingLoading = false
         }
     }
 

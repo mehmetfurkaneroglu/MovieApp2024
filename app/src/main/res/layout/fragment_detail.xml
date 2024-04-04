@@ -5,10 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import
-            alias="bindingAdapter"
-            type="com.eroglu.movieapp.util.BindingAdapters"/>
-
         <variable
             name="movieResult"
             type="com.eroglu.movieapp.model.MovieResult" />
@@ -215,7 +211,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:padding="4dp"
-                android:text="@{movieResult.spoken_languages.}"
+                android:text="@{movieResult.originalLanguage}"
                 android:hint="ekstras"
                 android:justificationMode="inter_word"
                 android:textColor="@color/white"
@@ -227,11 +223,10 @@
                 android:id="@+id/productionCompanies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{movieResult.}"
                 android:hint="production_companies"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spokenLanguages"
+                app:layout_constraintTop_toBottomOf="@id/spokenLanguages"/>
 
 
 
@@ -240,7 +235,7 @@
                 style="?android:attr/progressBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -252,4 +247,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

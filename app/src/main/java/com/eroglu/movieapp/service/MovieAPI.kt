@@ -1,10 +1,12 @@
 package com.eroglu.movieapp.service
 
+import com.eroglu.movieapp.model.MovieDetails
 import com.eroglu.movieapp.model.PopularMovies
 import com.eroglu.movieapp.model.UpcommingMovies
 import com.eroglu.movieapp.util.Constants.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MovieAPI {
@@ -17,5 +19,11 @@ interface MovieAPI {
     suspend fun getUpcomingMovies(
         @Query("api_key") apiKey: String = API_KEY,
     ): Response<UpcommingMovies>
+
+    @GET("movie/{id}}")
+    suspend fun getMovieDetail(
+        @Query("api_key") apiKey: String = API_KEY,
+        @Path("id") id: String
+    ): Response<MovieDetails>
 
 }
