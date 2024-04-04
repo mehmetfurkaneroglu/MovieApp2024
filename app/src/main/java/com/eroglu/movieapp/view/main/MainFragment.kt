@@ -1,8 +1,6 @@
 package com.eroglu.movieapp.view.main
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +12,6 @@ import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.FragmentMainBinding
 import com.eroglu.movieapp.model.MovieResult
 import com.eroglu.movieapp.util.Keys
-import com.eroglu.movieapp.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,12 +38,14 @@ class MainFragment : Fragment() {
     }
 
     private fun observe() {
+        /*
+        //bu error listesinin kontrolunü xml üzerinde bindingAdapters ile veriyorum.
         viewModel.popularMoviesList.observe(viewLifecycleOwner) { movieList ->
             when (movieList) {
                 is Resource.Success -> {
                     binding.popularMoviesProgressBar.visibility = View.GONE
 //                        movieList.data?.results?.let {
-////                            (binding.bestMoviesRecyclerView.adapter as MoviesAdapter).list = it
+//                            //(binding.bestMoviesRecyclerView.adapter as MoviesAdapter).list = it
 //                            viewModel.moviesAdapter.list = it
 //                        }
                 }
@@ -61,6 +60,8 @@ class MainFragment : Fragment() {
                 }
             }
         }
+         */
+        /*
 
         viewModel.upcomingMoviesList.observe(viewLifecycleOwner) { movieList ->
             when (movieList) {
@@ -78,6 +79,8 @@ class MainFragment : Fragment() {
                 }
             }
         }
+
+         */
 
         viewModel.selectedPopularMovie.observe(viewLifecycleOwner){movie ->
             movie.let {
@@ -101,7 +104,7 @@ class MainFragment : Fragment() {
             .navigate(R.id.action_mainFragment_to_detailFragment,bundle)
     }
 
-       /*
+    /*
     xmlden adapterı verdik
     private fun observer(){
         viewModel.popularMoviesList.observe(viewLifecycleOwner) {

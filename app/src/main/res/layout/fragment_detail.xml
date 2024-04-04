@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="movieResult"
+            type="com.eroglu.movieapp.model.MovieResult" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.detail.DetailFragment"
@@ -27,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:scaleType="centerCrop"
+                app:loadImage="@{movieResult.posterPath}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -56,6 +66,7 @@
                     android:id="@+id/backImageView"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
+                    app:isBackButton="@{true}"
                     android:background="@drawable/oval_btn_background"
                     android:padding="8dp"
                     android:src="@drawable/back"
@@ -91,7 +102,8 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/star"
                     android:drawablePadding="5dp"
-                    android:text="0"
+                    android:text="@{movieResult.voteAverage.toString()}"
+                    android:hint="Puan"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +130,8 @@
                     android:layout_marginStart="8dp"
                     android:drawableStart="@drawable/time"
                     android:drawablePadding="5dp"
-                    android:text="0"
+                    android:text="@{movieResult.releaseDate}"
+                    android:hint="Movie Time"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/movieTime"
@@ -131,7 +144,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="TextView"
+                android:text="@{movieResult.originalTitle.toString()}"
+                android:hint="Movie Name"
+                android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
@@ -143,6 +158,7 @@
                 android:layout_width="match_parent"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:visibility="gone"
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -167,7 +183,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:padding="4dp"
-                android:text="test"
+                android:text="@{movieResult.overview}"
+                android:hint="Movie Summary"
                 android:justificationMode="inter_word"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -188,19 +205,29 @@
                 app:layout_constraintTop_toBottomOf="@+id/movieSummary" />
 
             <TextView
-                android:id="@+id/moviebisey"
+                android:id="@+id/spokenLanguages"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:padding="4dp"
-                android:text="test"
+                android:text="@{movieResult.originalLanguage}"
+                android:hint="ekstras"
                 android:justificationMode="inter_word"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView17"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+            <TextView
+                android:id="@+id/productionCompanies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="production_companies"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spokenLanguages"/>
+
 
 
             <ProgressBar
@@ -220,3 +247,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
