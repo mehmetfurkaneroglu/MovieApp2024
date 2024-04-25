@@ -22,8 +22,8 @@ interface MovieAPI {
 
     @GET("movie/{id}}")
     suspend fun getMovieDetail(
-        @Query("api_key") apiKey: String = API_KEY,
-        @Path("id") id: String
+        @Path("id") id: String,
+        @Query("api_key") apiKey: String = API_KEY
     ): Response<MovieDetails>
 
 }

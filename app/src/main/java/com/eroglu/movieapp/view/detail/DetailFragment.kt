@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.library.baseAdapters.BR
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.eroglu.movieapp.databinding.FragmentDetailBinding
 import com.eroglu.movieapp.model.MovieResult
 import com.eroglu.movieapp.util.Keys
 import com.eroglu.movieapp.util.getMSerializable
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
 
+    private val detailViewModel: DetailViewModel by viewModels()
     private var _binding: FragmentDetailBinding? = null
     private val binding get()= _binding!!
 
@@ -21,7 +24,6 @@ class DetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         movie = arguments?.getMSerializable(Keys.MOVIE_DETAIL_KEY,MovieResult::class.java)
     }
 
@@ -30,46 +32,17 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailBinding.inflate(inflater,container,false)
-        binding.setVariable(BR.movieResult, movie)
+        binding.setVariable(BR.viewModel, detailViewModel)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
 
-
-        /*
-        bindingAdapter üzerinden verdim
-        context?.let {
-            Glide.with(it)
-                .load("${BASE_IMG_URL}${movie?.posterPath}")
-                .into(binding.picDetail)
+        movie?.id?.let {
+            detailViewModel.getMovieDetail(it)
         }
-         */
-
-        /*
-        // veriyi databinding ile xml'den veriyorum
-        binding.movieNameTextView.text = movie?.title.toString()
-        binding.movieStar.text = movie?.voteAverage.toString()
-        binding.movieSummary.text = movie?.overview
-        binding.movieRelease.text = movie?.releaseDate
-        binding.moviebisey.text = movie?.originalLanguage
-         */
-
-//        binding.backImageView.setOnClickListener {
-//            //Navigation.findNavController(view).popBackStack()
-//            // NavController'ü alın
-//            val navController = findNavController()
-//            // Geri işlemini yapın
-//            navController.popBackStack()
-//            //Bu kod parçası geri butonuna tıklandığında, NavController aracılığıyla geri işlemi yapar ve böylece MainActivity içindeki Navigation Graph'taki bir önceki fragmenta döner.
-//        }
-
-
-    }
-
-    fun observe(){
-
     }
 
 }

@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="movieResult"
-            type="com.eroglu.movieapp.model.MovieResult" />
+            name="viewModel"
+            type="com.eroglu.movieapp.view.detail.DetailViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:scaleType="centerCrop"
-                app:loadImage="@{movieResult.posterPath}"
+                app:loadImage="@{viewModel.selectedMovieDetail.posterPath}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/star"
                     android:drawablePadding="5dp"
-                    android:text="@{movieResult.voteAverage.toString()}"
+                    android:text="@{viewModel.selectedMovieDetail.voteAverage.toString()}"
                     android:hint="Puan"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -116,8 +116,7 @@
                     android:layout_marginStart="8dp"
                     android:drawableStart="@drawable/time"
                     android:drawablePadding="5dp"
-                    android:text="0"
-                    android:visibility="invisible"
+                    android:text="@{viewModel.selectedMovieDetail.runtime.toString()+` min`}"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/movieStar"
@@ -128,10 +127,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:drawableStart="@drawable/time"
+                    android:drawableStart="@drawable/baseline_calendar_today_24"
                     android:drawablePadding="5dp"
-                    android:text="@{movieResult.releaseDate}"
-                    android:hint="Movie Time"
+                    android:text="@{viewModel.selectedMovieDetail.releaseDate}"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/movieTime"
@@ -144,7 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="@{movieResult.originalTitle.toString()}"
+                android:text="@{viewModel.selectedMovieDetail.originalTitle.toString()}"
                 android:hint="Movie Name"
                 android:textStyle="bold"
                 android:textColor="@color/white"
@@ -171,6 +169,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
                 android:text="Summary"
+                android:textStyle="bold"
                 android:textColor="@color/yellow"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -182,18 +181,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:padding="4dp"
-                android:text="@{movieResult.overview}"
                 android:hint="Movie Summary"
                 android:justificationMode="inter_word"
+                android:padding="4dp"
+                android:text="@{viewModel.selectedMovieDetail.overview}"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView16"
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/extras"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -205,28 +204,164 @@
                 app:layout_constraintTop_toBottomOf="@+id/movieSummary" />
 
             <TextView
+                android:id="@+id/tagline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Tagline : ` + viewModel.selectedMovieDetail.tagline}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/extras" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Status : ` + viewModel.selectedMovieDetail.status}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tagline" />
+
+            <TextView
+                android:id="@+id/genres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Genre : ` + viewModel.getGenres(viewModel.selectedMovieDetail.genres)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/status"/>
+
+            <TextView
                 android:id="@+id/spokenLanguages"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:padding="4dp"
-                android:text="@{movieResult.originalLanguage}"
-                android:hint="ekstras"
+                android:text="@{`Original Language : ` + viewModel.selectedMovieDetail.originalLanguage}"
                 android:justificationMode="inter_word"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/genres" />
+
+            <TextView
+                android:id="@+id/homePage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Home Page : ` + viewModel.selectedMovieDetail.homepage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spokenLanguages" />
 
             <TextView
                 android:id="@+id/productionCompanies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="production_companies"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Production Companies : ` + viewModel.getProductionCompanies(viewModel.selectedMovieDetail.productionCompanies)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spokenLanguages"/>
+                app:layout_constraintTop_toBottomOf="@id/homePage"/>
+
+
+
+            <TextView
+                android:id="@+id/productionCountries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Production Countries : ` + viewModel.getProductionCountries(viewModel.selectedMovieDetail.productionCountries)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productionCompanies"/>
+
+            <TextView
+                android:id="@+id/budget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Budget : ` + viewModel.selectedMovieDetail.budget}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productionCountries" />
+
+            <TextView
+                android:id="@+id/revenue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Revenue : ` + viewModel.selectedMovieDetail.revenue}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/budget" />
+
+            <TextView
+                android:id="@+id/popularity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Popularity : ` + viewModel.selectedMovieDetail.popularity}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/revenue" />
+
+            <TextView
+                android:id="@+id/voteAvarage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Vote Avarage : ` + viewModel.selectedMovieDetail.voteAverage}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/popularity" />
+
+            <TextView
+                android:id="@+id/VoteCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:padding="4dp"
+                android:text="@{`Vote Count : ` + viewModel.selectedMovieDetail.voteCount}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/voteAvarage" />
+
 
 
 

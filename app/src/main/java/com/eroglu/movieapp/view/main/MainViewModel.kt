@@ -1,5 +1,6 @@
 package com.eroglu.movieapp.view.main
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.eroglu.movieapp.model.MovieResult
@@ -10,73 +11,65 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: Repository): ViewModel() {
+class MainViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
-    var isPopularLoading: Boolean = false
-    var isUpcomingLoading: Boolean = false
+    var isPopularLoading = MutableLiveData(false)
+    var isUpcomingLoading = MutableLiveData(false)
 
-    val selectedPopularMovie = SingleLiveEvent<MovieResult>()
-    val selectedUpcommingMovie = SingleLiveEvent<MovieResult>()
+    val selectedMovie = SingleLiveEvent<MovieResult>()
 
     init {
         getPopularMovies()
         getUpcomingMovies()
     }
 
-    val moviesAdapter =  MoviesAdapter().apply {
-        itemClickedListener = object : ItemClickedListener{
+    val moviesAdapter = MoviesAdapter().apply {
+        itemClickedListener = object : ItemClickedListener {
             override fun onItemClicked(item: MovieResult) {
-                selectedPopularMovie.postValue(item)
+                selectedMovie.postValue(item)
             }
         }
     }
 
-    val upcomingMoviesAdapter =  MoviesAdapter().apply {
-        itemClickedListener = object : ItemClickedListener{
+    val upcomingMoviesAdapter = MoviesAdapter().apply {
+        itemClickedListener = object : ItemClickedListener {
             override fun onItemClicked(item: MovieResult) {
-                selectedUpcommingMovie.postValue(item)
+                selectedMovie.postValue(item)
             }
         }
     }
 
-    private fun getPopularMovies(){
+    private fun getPopularMovies() {
         viewModelScope.launch {
-            isPopularLoading = true
+            isPopularLoading.value = true
             val result = repository.getPopularMovies()
 
-            if (result.isSuccessful){
+            if (result.isSuccessful) {
                 result.body()?.let {
                     it.results?.let {
                         moviesAdapter.list = it
                     }
                 }
             }
-            isPopularLoading = false
+            isPopularLoading.value = false
         }
     }
 
-    private fun getUpcomingMovies(){
+    private fun getUpcomingMovies() {
         viewModelScope.launch {
-//            upcomingMoviesList.postValue(Resource.Loading())
-            isUpcomingLoading = true
+            isUpcomingLoading.value = true
 
             val result = repository.getUpcomingMovies()
 
-            if (result.isSuccessful){
+            if (result.isSuccessful) {
 
                 result.body()?.let {
-//                    upcomingMoviesList.postValue(Resource.Success(it))
                     it.results?.let {
                         upcomingMoviesAdapter.list = it
                     }
-                }//?:kotlin.run {
-//                    upcomingMoviesList.postValue(Resource.Error("List Null"))
-//                }
-            }//else{
-//                upcomingMoviesList.postValue(Resource.Error("Call Not Successful"))
-//            }
-            isUpcomingLoading = false
+                    isUpcomingLoading.value = false
+                }
+            }
         }
     }
-
 }

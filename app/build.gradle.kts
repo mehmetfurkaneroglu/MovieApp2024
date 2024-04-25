@@ -2,9 +2,10 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id ("androidx.navigation.safeargs")
-    kotlin("kapt")
+    //kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id ("kotlin-parcelize")
+    id ("kotlin-kapt")
     id("com.google.gms.google-services")
 }
 
