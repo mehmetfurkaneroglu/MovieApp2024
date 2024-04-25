@@ -3,7 +3,7 @@ package com.eroglu.movieapp.view.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eroglu.movieapp.model.MovieResult
+import com.eroglu.movieapp.model.movies.MovieResult
 import com.eroglu.movieapp.service.Repository
 import com.eroglu.movieapp.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel

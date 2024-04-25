@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eroglu.movieapp.model.Genre
-import com.eroglu.movieapp.model.MovieDetails
-import com.eroglu.movieapp.model.ProductionCompany
-import com.eroglu.movieapp.model.ProductionCountry
+import com.eroglu.movieapp.model.movies.Genre
+import com.eroglu.movieapp.model.movies.MovieDetails
+import com.eroglu.movieapp.model.movies.ProductionCompany
+import com.eroglu.movieapp.model.movies.ProductionCountry
 import com.eroglu.movieapp.service.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

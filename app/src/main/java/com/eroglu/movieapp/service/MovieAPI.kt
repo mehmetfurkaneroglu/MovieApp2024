@@ -1,8 +1,10 @@
 package com.eroglu.movieapp.service
 
-import com.eroglu.movieapp.model.MovieDetails
-import com.eroglu.movieapp.model.PopularMovies
-import com.eroglu.movieapp.model.UpcommingMovies
+import com.eroglu.movieapp.model.movies.MovieDetails
+import com.eroglu.movieapp.model.movies.PopularMovies
+import com.eroglu.movieapp.model.movies.UpcommingMovies
+import com.eroglu.movieapp.model.tvSeries.TvSeriesAiringToday
+import com.eroglu.movieapp.model.tvSeries.TvSeriesPopular
 import com.eroglu.movieapp.util.Constants.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -25,5 +27,15 @@ interface MovieAPI {
         @Path("id") id: String,
         @Query("api_key") apiKey: String = API_KEY
     ): Response<MovieDetails>
+
+    @GET("tv/popular")
+    suspend fun getPopularTvSeries(
+        @Query("api_key") apiKey: String = API_KEY,
+    ): Response<TvSeriesPopular>
+
+    @GET("tv/airing_today")
+    suspend fun getAiringTodayTvSeries(
+        @Query("api_key") apiKey: String = API_KEY,
+    ): Response<TvSeriesAiringToday>
 
 }

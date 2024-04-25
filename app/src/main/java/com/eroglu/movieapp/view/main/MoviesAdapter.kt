@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eroglu.movieapp.BR
 import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.PopularMoviesItemBinding
-import com.eroglu.movieapp.model.MovieResult
+import com.eroglu.movieapp.model.movies.MovieResult
 
 interface ItemClickedListener{
     fun onItemClicked(item: MovieResult)

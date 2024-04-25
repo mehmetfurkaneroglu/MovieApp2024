@@ -6,16 +6,16 @@
     <data>
         <variable
             name="callBack"
-            type="com.eroglu.movieapp.view.main.ItemClickedListener" />
+            type="com.eroglu.movieapp.view.tvSeries.ItemClickedListenerTv" />
         <variable
             name="data"
-            type="com.eroglu.movieapp.model.movies.MovieResult" />
+            type="com.eroglu.movieapp.model.tvSeries.TVSeriesResult" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> callBack.onItemClicked(data)}">
+        android:onClick="@{() -> callBack.onItemClickedTv(data)}">
 
         <ImageView
             android:id="@+id/imageView"
@@ -36,7 +36,7 @@
             android:padding="8dp"
             android:lines="3"
             android:ellipsize="end"
-            android:text="@{data.title}"
+            android:text="@{data.name}"
             app:isBold="@{true}"
             app:layout_constraintTop_toBottomOf="@id/imageView"
             app:layout_constraintStart_toStartOf="@id/imageView"

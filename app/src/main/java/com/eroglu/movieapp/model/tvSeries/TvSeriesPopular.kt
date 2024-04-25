@@ -1,15 +1,13 @@
-package com.eroglu.movieapp.model
+package com.eroglu.movieapp.model.tvSeries
 
 
 import com.google.gson.annotations.SerializedName
 
-data class UpcommingMovies(
-    @SerializedName("dates")
-    val dates: Dates? = null,
+data class TvSeriesPopular(
     @SerializedName("page")
     val page: Int? = null,
     @SerializedName("results")
-    val results: List<MovieResult?>? = null,
+    val results: List<TVSeriesResult>? = null,
     @SerializedName("total_pages")
     val totalPages: Int? = null,
     @SerializedName("total_results")

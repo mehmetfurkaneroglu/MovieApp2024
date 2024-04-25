@@ -5,22 +5,64 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import com.eroglu.movieapp.BR
 import com.eroglu.movieapp.R
+import com.eroglu.movieapp.databinding.FragmentTvSeriesBinding
+import com.eroglu.movieapp.model.tvSeries.TVSeriesResult
+import com.eroglu.movieapp.util.Keys
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class TvSeriesFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+    private val viewModel: TvSeriesViewModel by viewModels()
+    private var _binding: FragmentTvSeriesBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tv_series, container, false)
+    ): View {
+        _binding = FragmentTvSeriesBinding.inflate(inflater, container, false)
+        binding.setVariable(BR.tvViewModel, viewModel)
+        return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.lifecycleOwner = this
+        observe()
+    }
+
+    private fun observe() {
+        viewModel.selectedTvSeries.observe(viewLifecycleOwner){movie ->
+            movie.let {
+                navigateToTvSeriesDetail(it)
+            }
+        }
+
+        viewModel.selectedTvSeries.observe(viewLifecycleOwner){movie ->
+            movie.let {
+                navigateToTvSeriesDetail(it)
+            }
+        }
+    }
+
+    private fun navigateToTvSeriesDetail(tvSeries: TVSeriesResult){
+        val bundle = Bundle().apply {
+            putSerializable(Keys.TV_SERIES_DETAIL_KEY,tvSeries)
+        }
+
+        Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
+            .navigate(R.id.action_tvSeriesFragment_to_detailFragment,bundle)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }
