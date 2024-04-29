@@ -37,14 +37,8 @@ class TvSeriesFragment : Fragment() {
     }
 
     private fun observe() {
-        viewModel.selectedTvSeries.observe(viewLifecycleOwner){movie ->
-            movie.let {
-                navigateToTvSeriesDetail(it)
-            }
-        }
-
-        viewModel.selectedTvSeries.observe(viewLifecycleOwner){movie ->
-            movie.let {
+        viewModel.selectedTvSeries.observe(viewLifecycleOwner){tvSeries ->
+            tvSeries.let {
                 navigateToTvSeriesDetail(it)
             }
         }
@@ -56,7 +50,7 @@ class TvSeriesFragment : Fragment() {
         }
 
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
-            .navigate(R.id.action_tvSeriesFragment_to_detailFragment,bundle)
+            .navigate(R.id.action_tvSeriesFragment_to_tvSeriesDetailFragment,bundle)
     }
 
     override fun onDestroyView() {

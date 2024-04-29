@@ -6,7 +6,7 @@
     <data>
         <variable
             name="callBack"
-            type="com.eroglu.movieapp.view.main.ItemClickedListener" />
+            type="com.eroglu.movieapp.view.movie.ItemClickedListener" />
         <variable
             name="data"
             type="com.eroglu.movieapp.model.movies.MovieResult" />

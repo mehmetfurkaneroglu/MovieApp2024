@@ -1,4 +1,4 @@
-package com.eroglu.movieapp.view.main
+package com.eroglu.movieapp.view.movie
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+class MoviesViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     var isPopularLoading = MutableLiveData(false)
     var isUpcomingLoading = MutableLiveData(false)

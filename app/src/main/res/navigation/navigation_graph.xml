@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.eroglu.movieapp.view.main.MainFragment"
+        android:name="com.eroglu.movieapp.view.movie.MoviesFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_movies" >
         <action
             android:id="@+id/action_mainFragment_to_detailFragment"
             app:destination="@id/detailFragment"
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.eroglu.movieapp.view.detail.DetailFragment"
+        android:name="com.eroglu.movieapp.view.detail.movies.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <action
@@ -43,7 +43,15 @@
         android:label="fragment_tv_series"
         tools:layout="@layout/fragment_tv_series" >
         <action
-            android:id="@+id/action_tvSeriesFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_tvSeriesFragment_to_tvSeriesDetailFragment"
+            app:destination="@id/tvSeriesDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvSeriesDetailFragment"
+        android:name="com.eroglu.movieapp.view.detail.tvSeries.TvSeriesDetailFragment"
+        android:label="TvSeriesDetailFragment" >
+        <action
+            android:id="@+id/action_tvSeriesDetailFragment_to_tvSeriesFragment"
+            app:destination="@id/tvSeriesFragment" />
     </fragment>
 </navigation>

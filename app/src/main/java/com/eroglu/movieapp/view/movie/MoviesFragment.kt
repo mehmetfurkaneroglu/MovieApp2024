@@ -1,4 +1,4 @@
-package com.eroglu.movieapp.view.main
+package com.eroglu.movieapp.view.movie
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,23 +9,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.eroglu.movieapp.BR
 import com.eroglu.movieapp.R
-import com.eroglu.movieapp.databinding.FragmentMainBinding
+import com.eroglu.movieapp.databinding.FragmentMoviesBinding
 import com.eroglu.movieapp.model.movies.MovieResult
 import com.eroglu.movieapp.util.Keys
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MoviesFragment : Fragment() {
 
-    private val viewModel: MainViewModel by viewModels()
-    private var _binding: FragmentMainBinding? = null
+    private val viewModel: MoviesViewModel by viewModels()
+    private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        _binding = FragmentMoviesBinding.inflate(inflater, container, false)
         binding.setVariable(BR.viewModel, viewModel)
         return binding.root
     }

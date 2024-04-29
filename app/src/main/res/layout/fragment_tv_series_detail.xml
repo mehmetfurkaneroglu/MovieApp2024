@@ -6,15 +6,15 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.eroglu.movieapp.view.detail.movies.DetailViewModel" />
+            name="tvViewModel"
+            type="com.eroglu.movieapp.view.detail.tvSeries.TvSeriesDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.detail.movies.DetailFragment"
+        tools:context=".view.detail.tvSeries.TvSeriesDetailFragment"
         android:background="@color/main_color">
 
         <androidx.core.widget.NestedScrollView
@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
                     android:scaleType="centerCrop"
-                    app:loadImage="@{viewModel.selectedMovieDetail.posterPath}"
+                    app:loadImage="@{tvViewModel.selectedTvSeriesDetail.posterPath}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -102,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/star"
                         android:drawablePadding="5dp"
-                        android:text="@{viewModel.selectedMovieDetail.voteAverage.toString()}"
+                        android:text="@{tvViewModel.selectedTvSeriesDetail.voteAverage.toString()}"
                         android:hint="Puan"
                         android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -116,7 +116,7 @@
                         android:layout_marginStart="8dp"
                         android:drawableStart="@drawable/time"
                         android:drawablePadding="5dp"
-                        android:text="@{viewModel.selectedMovieDetail.runtime.toString()+` min`}"
+                        android:text="@{tvViewModel.selectedTvSeriesDetail.episodeRunTime.toString()+` min`}"
                         android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/movieStar"
@@ -129,7 +129,7 @@
                         android:layout_marginStart="8dp"
                         android:drawableStart="@drawable/baseline_calendar_today_24"
                         android:drawablePadding="5dp"
-                        android:text="@{viewModel.selectedMovieDetail.releaseDate}"
+                        android:text="@{tvViewModel.selectedTvSeriesDetail.numberOfEpisodes}"
                         android:textColor="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/movieTime"
@@ -142,7 +142,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:text="@{viewModel.selectedMovieDetail.originalTitle.toString()}"
+                    android:text="@{tvViewModel.selectedTvSeriesDetail.name.toString()}"
                     android:hint="Movie Name"
                     android:textStyle="bold"
                     android:textColor="@color/white"
@@ -184,7 +184,7 @@
                     android:hint="Movie Summary"
                     android:justificationMode="inter_word"
                     android:padding="4dp"
-                    android:text="@{viewModel.selectedMovieDetail.overview}"
+                    android:text="@{tvViewModel.selectedTvSeriesDetail.overview}"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -211,7 +211,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Tagline : ` + viewModel.selectedMovieDetail.tagline}"
+                    android:text="@{`Tagline : ` + tvViewModel.selectedTvSeriesDetail.tagline}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/extras" />
@@ -224,7 +224,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Status : ` + viewModel.selectedMovieDetail.status}"
+                    android:text="@{`Status : ` + tvViewModel.selectedTvSeriesDetail.status}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tagline" />
@@ -237,7 +237,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Genre : ` + viewModel.getGenres(viewModel.selectedMovieDetail.genres)}"
+                    android:text="@{`Genre : ` + tvViewModel.selectedTvSeriesDetail.genres}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/status"/>
@@ -249,7 +249,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Original Language : ` + viewModel.selectedMovieDetail.originalLanguage}"
+                    android:text="@{`Original Language : ` + tvViewModel.selectedTvSeriesDetail.originalLanguage}"
                     android:justificationMode="inter_word"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -264,7 +264,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Home Page : ` + viewModel.selectedMovieDetail.homepage}"
+                    android:clickable="true"
+                    android:onClick="onHomePageClicked"
+                    android:text="@{`Home Page : ` + tvViewModel.selectedTvSeriesDetail.homepage}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/spokenLanguages" />
@@ -277,7 +279,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Production Companies : ` + viewModel.getProductionCompanies(viewModel.selectedMovieDetail.productionCompanies)}"
+                    android:text="@{`Production Companies : ` + tvViewModel.selectedTvSeriesDetail.productionCompanies}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/homePage"/>
@@ -292,36 +294,36 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Production Countries : ` + viewModel.getProductionCountries(viewModel.selectedMovieDetail.productionCountries)}"
+                    android:text="@{`Production Countries : ` + tvViewModel.selectedTvSeriesDetail.productionCountries}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/productionCompanies"/>
 
                 <TextView
-                    android:id="@+id/budget"
+                    android:id="@+id/createdBy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Budget : ` + viewModel.selectedMovieDetail.budget}"
+                    android:text="@{`Created By : ` + tvViewModel.selectedTvSeriesDetail.createdBy}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/productionCountries" />
 
                 <TextView
-                    android:id="@+id/revenue"
+                    android:id="@+id/numberOfSeasons"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Revenue : ` + viewModel.selectedMovieDetail.revenue}"
+                    android:text="@{`Number Of Seasons : ` + tvViewModel.selectedTvSeriesDetail.numberOfSeasons}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/budget" />
+                    app:layout_constraintTop_toBottomOf="@id/createdBy" />
 
                 <TextView
                     android:id="@+id/popularity"
@@ -331,10 +333,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Popularity : ` + viewModel.selectedMovieDetail.popularity}"
+                    android:text="@{`Popularity : ` + tvViewModel.selectedTvSeriesDetail.popularity}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/revenue" />
+                    app:layout_constraintTop_toBottomOf="@id/numberOfSeasons" />
 
                 <TextView
                     android:id="@+id/voteAvarage"
@@ -344,7 +346,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Vote Avarage : ` + viewModel.selectedMovieDetail.voteAverage}"
+                    android:text="@{`Vote Avarage : ` + tvViewModel.selectedTvSeriesDetail.voteAverage}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/popularity" />
@@ -357,7 +359,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
                     android:padding="4dp"
-                    android:text="@{`Vote Count : ` + viewModel.selectedMovieDetail.voteCount}"
+                    android:text="@{`Vote Count : ` + tvViewModel.selectedTvSeriesDetail.voteCount}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/voteAvarage" />

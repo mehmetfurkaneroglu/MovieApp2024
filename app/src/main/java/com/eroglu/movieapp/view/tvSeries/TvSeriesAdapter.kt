@@ -36,8 +36,7 @@ class TvSeriesAdapter: RecyclerView.Adapter<TvSeriesAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TvSeriesAdapter.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<TvSeriesItemBinding>(inflater,
-            R.layout.tv_series_item,parent,false)
+        val binding = DataBindingUtil.inflate<TvSeriesItemBinding>(inflater,R.layout.tv_series_item,parent,false)
         return ViewHolder(binding)
     }
 

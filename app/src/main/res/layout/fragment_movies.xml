@@ -7,14 +7,14 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.eroglu.movieapp.view.main.MainViewModel" />
+            type="com.eroglu.movieapp.view.movie.MoviesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_color"
-        tools:context=".view.main.MainFragment">
+        tools:context=".view.movie.MoviesFragment">
 
         <ScrollView
             android:layout_width="match_parent"

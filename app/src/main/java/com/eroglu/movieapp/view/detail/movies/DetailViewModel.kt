@@ -1,4 +1,4 @@
-package com.eroglu.movieapp.view.detail
+package com.eroglu.movieapp.view.detail.movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,6 +18,7 @@ class DetailViewModel @Inject constructor(private val repository: Repository): V
 
     private val _selectedMovieDetail = MutableLiveData<MovieDetails>()
     val selectedMovieDetail : LiveData<MovieDetails> = _selectedMovieDetail
+
 
     fun getMovieDetail(id: Int) {
         viewModelScope.launch {
@@ -65,8 +66,6 @@ class DetailViewModel @Inject constructor(private val repository: Repository): V
         }
         return countryNames.toString()
     }
-
-
 
 
 }

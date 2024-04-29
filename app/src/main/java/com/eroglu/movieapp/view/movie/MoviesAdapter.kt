@@ -1,4 +1,4 @@
-package com.eroglu.movieapp.view.main
+package com.eroglu.movieapp.view.movie
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,0 +1,8 @@
+https://api.themoviedb.org/3/genre/movie/list?api_key=a77e0becffd6c2df7befbeda991fdb1d
+
+https://api.themoviedb.org/3/tv/airing_today?api_key=a77e0becffd6c2df7befbeda991fdb1d
+
+https://api.themoviedb.org/3/tv/popular?api_key=a77e0becffd6c2df7befbeda991fdb1d
+
+https://api.themoviedb.org/3/tv/12?api_key=a77e0becffd6c2df7befbeda991fdb1d
+
