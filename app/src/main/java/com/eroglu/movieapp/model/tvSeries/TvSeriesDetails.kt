@@ -2,6 +2,7 @@ package com.eroglu.movieapp.model.tvSeries
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class TvSeriesDetails(
     @SerializedName("adult")
@@ -68,4 +69,4 @@ data class TvSeriesDetails(
     val voteAverage: Double? = null,
     @SerializedName("vote_count")
     val voteCount: Int? = null
-)
+): Serializable

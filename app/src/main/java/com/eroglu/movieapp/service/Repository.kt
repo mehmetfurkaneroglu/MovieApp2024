@@ -4,7 +4,7 @@ import com.eroglu.movieapp.model.movies.MovieDetails
 import com.eroglu.movieapp.model.movies.PopularMovies
 import com.eroglu.movieapp.model.movies.UpcommingMovies
 import com.eroglu.movieapp.model.tvSeries.TvSeriesAiringToday
-import com.eroglu.movieapp.model.tvSeries.TvSeriesDetails
+import com.eroglu.movieapp.model.tvSeries.TvSeriesDetail
 import com.eroglu.movieapp.model.tvSeries.TvSeriesPopular
 import com.eroglu.movieapp.util.Constants.API_KEY
 import retrofit2.Response
@@ -31,7 +31,7 @@ class Repository(private val api: MovieAPI) {
         return api.getAiringTodayTvSeries()
     }
 
-    suspend fun getTvSeriesDetail(id: String): Response<TvSeriesDetails> {
+    suspend fun getTvSeriesDetail(id: String): Response<TvSeriesDetail> {
         return api.getTvSeriesDetail(id,API_KEY)
     }
 
