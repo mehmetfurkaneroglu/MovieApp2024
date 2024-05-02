@@ -46,7 +46,7 @@ class MoviesFragment : Fragment() {
 
     private fun navigateToMovieDetail(movie: MovieResult){
         val bundle = Bundle().apply {
-            putSerializable(Keys.MOVIE_DETAIL_KEY,movie)
+            putInt(Keys.MOVIE_DETAIL_KEY,movie.id?:0)
         }
 
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)

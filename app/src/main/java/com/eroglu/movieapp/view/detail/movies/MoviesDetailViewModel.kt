@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val repository: Repository): ViewModel() {
+class MoviesDetailViewModel @Inject constructor(private val repository: Repository): ViewModel() {
 
     private val _selectedMovieDetail = MutableLiveData<MovieDetails>()
     val selectedMovieDetail : LiveData<MovieDetails> = _selectedMovieDetail
@@ -27,6 +27,8 @@ class DetailViewModel @Inject constructor(private val repository: Repository): V
                 result.body()?.let {
                     _selectedMovieDetail.postValue(it)
                 }
+            }else{
+                println("")
             }
         }
     }

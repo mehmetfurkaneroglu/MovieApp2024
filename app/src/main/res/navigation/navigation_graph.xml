@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.eroglu.movieapp.view.detail.movies.DetailFragment"
+        android:name="com.eroglu.movieapp.view.detail.movies.MoviesDetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <action
@@ -31,7 +31,14 @@
         android:id="@+id/favoriteFragment"
         android:name="com.eroglu.movieapp.view.favorite.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_tvSeriesDetailFragment"
+            app:destination="@id/tvSeriesDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.eroglu.movieapp.view.profile.ProfileFragment"

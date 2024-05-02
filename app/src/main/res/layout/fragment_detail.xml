@@ -7,14 +7,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.eroglu.movieapp.view.detail.movies.DetailViewModel" />
+            type="com.eroglu.movieapp.view.detail.movies.MoviesDetailViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.detail.movies.DetailFragment"
+        tools:context=".view.detail.movies.MoviesDetailFragment"
         android:background="@color/main_color">
 
         <androidx.core.widget.NestedScrollView

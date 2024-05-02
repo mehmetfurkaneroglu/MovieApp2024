@@ -46,7 +46,7 @@ class TvSeriesFragment : Fragment() {
 
     private fun navigateToTvSeriesDetail(tvSeries: TVSeriesResult){
         val bundle = Bundle().apply {
-            putSerializable(Keys.TV_SERIES_DETAIL_KEY,tvSeries)
+            putInt(Keys.TV_SERIES_DETAIL_KEY,tvSeries.id?:0)
         }
 
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)

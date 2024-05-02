@@ -39,7 +39,7 @@ interface MovieAPI {
         @Query("api_key") apiKey: String = API_KEY,
     ): Response<TvSeriesAiringToday>
 
-    @GET("tv/{id}}")
+    @GET("tv/{id}")
     suspend fun getTvSeriesDetail(
         @Path("id") id: String,
         @Query("api_key") apiKey: String = API_KEY

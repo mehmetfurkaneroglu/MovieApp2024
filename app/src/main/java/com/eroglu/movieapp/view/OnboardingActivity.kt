@@ -23,6 +23,9 @@ class OnboardingActivity: AppCompatActivity() {
         val sharedPreferences = getSharedPreferences(Constants.DATABASE_NAME, Context.MODE_PRIVATE)
         val hasActiveUser = sharedPreferences.getBoolean(Keys.HAS_ACTIVE_USER, false)
 
+        val email = sharedPreferences.getString(Keys.USER_EMAIL, "")
+        val password = sharedPreferences.getString(Keys.USER_PASSWORD, "")
+
         if (hasActiveUser){
             startActivity(Intent(this, MainActivity::class.java))
             this.finish()
