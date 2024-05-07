@@ -1,10 +1,10 @@
 package com.eroglu.movieapp.view.favorite
 
 data class FavoriteModel(
-    val itemId: String? = "",
-    val itemName: String? = "",
-    val itemPicture: String? = "",
-    val itemType: FavoriteItemTypeEnum? = FavoriteItemTypeEnum.MOVIES
+    val movieId: String? = "",
+    val movieName: String? = "",
+    val moviePicture: String? = "",
+    val type: FavoriteItemTypeEnum? = FavoriteItemTypeEnum.MOVIES
 )
 
 enum class FavoriteItemTypeEnum{

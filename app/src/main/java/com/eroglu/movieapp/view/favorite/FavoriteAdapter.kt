@@ -26,7 +26,7 @@ class FavoriteAdapter(private val favoriteList: List<FavoriteModel>,val clickLis
 
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
         val currentItem = favoriteList[position]
-        when(favoriteList[position].itemType?.name){
+        when(favoriteList[position].type?.name){
             FavoriteItemTypeEnum.MOVIES.name ->{
                 holder.constraintLayout.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.c1))
             }
@@ -34,9 +34,9 @@ class FavoriteAdapter(private val favoriteList: List<FavoriteModel>,val clickLis
                 holder.constraintLayout.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.c2))
             }
         }
-        holder.tvTitle.text = currentItem.itemName
+        holder.tvTitle.text = currentItem.movieName
         Glide.with(holder.itemView)
-            .load("https://image.tmdb.org/t/p/w500${currentItem.itemPicture}")
+            .load("https://image.tmdb.org/t/p/w500${currentItem.moviePicture}")
             .apply(RequestOptions().centerCrop())
             .into(holder.ivMovieImage)
 
