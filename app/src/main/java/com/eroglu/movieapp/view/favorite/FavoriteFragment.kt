@@ -42,10 +42,10 @@ class FavoriteFragment : Fragment() {
         favoriteAdapter = FavoriteAdapter(favoriteList, clickListener = object : ItemClickedListener{
             override fun onItemClicked(favoriteModel: FavoriteModel) {
                 val bundle = Bundle()
-                when(favoriteModel.type?.name){
+                when(favoriteModel.itemType?.name){
                     FavoriteItemTypeEnum.MOVIES.name ->{
                         bundle.apply {
-                            putInt(Keys.MOVIE_DETAIL_KEY,favoriteModel.movieId?.toInt()?:0)
+                            putInt(Keys.MOVIE_DETAIL_KEY,favoriteModel.itemId?.toInt()?:0)
                         }
                         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
                             .navigate(R.id.action_favoriteFragment_to_detailFragment,bundle)
@@ -53,7 +53,7 @@ class FavoriteFragment : Fragment() {
                     }
                     FavoriteItemTypeEnum.TV_SERIES.name ->{
                         bundle.apply {
-                            putInt(Keys.TV_SERIES_DETAIL_KEY,favoriteModel.movieId?.toInt()?:0)
+                            putInt(Keys.TV_SERIES_DETAIL_KEY,favoriteModel.itemId?.toInt()?:0)
                         }
                         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)
                             .navigate(R.id.action_favoriteFragment_to_tvSeriesDetailFragment,bundle)
