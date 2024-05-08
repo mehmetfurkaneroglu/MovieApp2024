@@ -20,7 +20,7 @@ class MoviesDetailFragment : Fragment() {
 
     private val detailViewModel: MoviesDetailViewModel by viewModels()
     private var _binding: FragmentDetailBinding? = null
-    private val binding get()= _binding!!
+    private val binding get() = _binding!!
 
     private var id: Int? = null
 
@@ -33,7 +33,7 @@ class MoviesDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailBinding.inflate(inflater,container,false)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
         binding.setVariable(BR.viewModel, detailViewModel)
         return binding.root
     }
@@ -48,25 +48,23 @@ class MoviesDetailFragment : Fragment() {
 
         var database = FirebaseDatabase.getInstance().reference
         //Veri ekleme işlemi
-        binding.favoriteImageView.setOnClickListener{
-            var movieId = detailViewModel.selectedMovieDetail.value?.id.toString()
-            var movieName = detailViewModel.selectedMovieDetail.value?.originalTitle
-            var moviePicture = detailViewModel.selectedMovieDetail.value?.posterPath
+        binding.favoriteImageView.setOnClickListener {
+            var itemId = detailViewModel.selectedMovieDetail.value?.id.toString()
+            var itemName = detailViewModel.selectedMovieDetail.value?.originalTitle
+            var itemPicture = detailViewModel.selectedMovieDetail.value?.posterPath
 
-            val movieInfo = HashMap<String, Any>()
-            movieInfo["movieName"] = movieName!!
-            movieInfo["moviePicture"] = moviePicture!!
-            movieInfo["movieId"] = movieId
-            movieInfo["type"] = FavoriteItemTypeEnum.MOVIES.name
+            val itemInfo = HashMap<String, Any>()
+            itemInfo["itemName"] = itemName!!
+            itemInfo["itemPicture"] = itemPicture!!
+            itemInfo["itemId"] = itemId
+            itemInfo["itemType"] = FavoriteItemTypeEnum.MOVIES
 
             database
-                .child("favorite_movies")
+                .child("users")
                 .child(Firebase.auth.currentUser?.uid.toString())
-                .child(detailViewModel.selectedMovieDetail.value?.id.toString())
-                .setValue(movieInfo)
-
+                .child("favorite_movies")
+                .child(itemId)
+                .setValue(itemInfo)
         }
-
     }
-
 }

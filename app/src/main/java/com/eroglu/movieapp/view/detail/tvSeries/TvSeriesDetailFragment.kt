@@ -20,7 +20,7 @@ class TvSeriesDetailFragment : Fragment() {
 
     private val viewModel: TvSeriesDetailViewModel by viewModels()
     private var _binding: FragmentTvSeriesDetailBinding? = null
-    private val binding get()= _binding!!
+    private val binding get() = _binding!!
 
     private var id: Int? = null
 
@@ -33,7 +33,7 @@ class TvSeriesDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentTvSeriesDetailBinding.inflate(inflater,container,false)
+        _binding = FragmentTvSeriesDetailBinding.inflate(inflater, container, false)
         binding.setVariable(BR.tvViewModel, viewModel)
         return binding.root
     }
@@ -46,24 +46,25 @@ class TvSeriesDetailFragment : Fragment() {
             viewModel.getTvSeriesDetail(it)
         }
 
-        binding.favoriteImageView.setOnClickListener{
-            var movieId = viewModel.selectedTvSeriesDetail.value?.id.toString()
-            var movieName = viewModel.selectedTvSeriesDetail.value?.name
-            var moviePicture = viewModel.selectedTvSeriesDetail.value?.posterPath
+        var database = FirebaseDatabase.getInstance().reference
+        binding.favoriteImageView.setOnClickListener {
+            var itemId = viewModel.selectedTvSeriesDetail.value?.id.toString()
+            var itemName = viewModel.selectedTvSeriesDetail.value?.name
+            var itemPicture = viewModel.selectedTvSeriesDetail.value?.posterPath
 
-            val movieInfo = HashMap<String, Any>()
-            movieInfo["movieName"] = movieName!!
-            movieInfo["moviePicture"] = moviePicture!!
-            movieInfo["movieId"] = movieId
-            movieInfo["type"] = FavoriteItemTypeEnum.TV_SERIES.name
+            val itemInfo = HashMap<String, Any>()
+            itemInfo["itemName"] = itemName!!
+            itemInfo["itemPicture"] = itemPicture!!
+            itemInfo["itemId"] = itemId
+            itemInfo["itemType"] = FavoriteItemTypeEnum.TV_SERIES.name
 
-            FirebaseDatabase.getInstance().reference
-                .child("favorite_movies")
+            database
+                .child("users")
                 .child(Firebase.auth.currentUser?.uid.toString())
-                .child(viewModel.selectedTvSeriesDetail.value?.id.toString())
-                .setValue(movieInfo)
+                .child("favorite_tv_series")
+                .child(itemId)
+                .setValue(itemInfo)
 
         }
     }
-
 }
