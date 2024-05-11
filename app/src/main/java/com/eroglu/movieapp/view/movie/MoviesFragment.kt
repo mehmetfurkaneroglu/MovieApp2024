@@ -12,6 +12,7 @@ import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.FragmentMoviesBinding
 import com.eroglu.movieapp.model.movies.MovieResult
 import com.eroglu.movieapp.util.Keys
+import com.eroglu.movieapp.view.detail.viewpager.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,6 +35,21 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         observe()
+
+        val images = listOf(
+            R.drawable.wide,
+            R.drawable.wide1,
+            R.drawable.wide3,
+            R.drawable.pikachu1,
+        )
+
+        val adapter = ViewPagerAdapter(images)
+        binding.viewpager2Slider.adapter = adapter
+
+        binding.viewpager2Slider.beginFakeDrag() //sahte bir sürükleme işlemini başlatır.
+        binding.viewpager2Slider.fakeDragBy(-10f) //belirli bir mesafe kadar sürüklemeyi sağlar.
+        binding.viewpager2Slider.endFakeDrag()
+
     }
 
     private fun observe() {

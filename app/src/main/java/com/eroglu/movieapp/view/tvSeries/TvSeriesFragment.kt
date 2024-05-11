@@ -12,6 +12,7 @@ import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.FragmentTvSeriesBinding
 import com.eroglu.movieapp.model.tvSeries.TVSeriesResult
 import com.eroglu.movieapp.util.Keys
+import com.eroglu.movieapp.view.detail.viewpager.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,6 +35,25 @@ class TvSeriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.lifecycleOwner = this
         observe()
+
+        val imagesTv = listOf(
+            R.drawable.pikachu1,
+            R.drawable.pikachu3,
+            R.drawable.pikachu5,
+            R.drawable.wide,
+            R.drawable.wide1,
+            R.drawable.wide3,
+
+        )
+
+//        val adapter = ViewPagerAdapter(imagesTv)
+//        binding.viewpagerSlider.adapter = adapter
+        binding.viewpagerSlider.adapter = ViewPagerAdapter(imagesTv)
+
+        binding.viewpagerSlider.beginFakeDrag() //sahte bir sürükleme işlemini başlatır.
+        binding.viewpagerSlider.fakeDragBy(-10f) //belirli bir mesafe kadar sürüklemeyi sağlar.
+        binding.viewpagerSlider.endFakeDrag()
+
     }
 
     private fun observe() {
