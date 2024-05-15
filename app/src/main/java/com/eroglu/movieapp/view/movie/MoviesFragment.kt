@@ -46,9 +46,9 @@ class MoviesFragment : Fragment() {
         val adapter = ViewPagerAdapter(images)
         binding.viewpager2Slider.adapter = adapter
 
-        binding.viewpager2Slider.beginFakeDrag() //sahte bir sürükleme işlemini başlatır.
-        binding.viewpager2Slider.fakeDragBy(-10f) //belirli bir mesafe kadar sürüklemeyi sağlar.
-        binding.viewpager2Slider.endFakeDrag()
+//        binding.viewpager2Slider.beginFakeDrag() //sahte bir sürükleme işlemini başlatır.
+//        binding.viewpager2Slider.fakeDragBy(-10f) //belirli bir mesafe kadar sürüklemeyi sağlar.
+//        binding.viewpager2Slider.endFakeDrag()
 
     }
 

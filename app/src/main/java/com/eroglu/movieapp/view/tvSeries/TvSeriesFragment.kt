@@ -50,9 +50,9 @@ class TvSeriesFragment : Fragment() {
 //        binding.viewpagerSlider.adapter = adapter
         binding.viewpagerSlider.adapter = ViewPagerAdapter(imagesTv)
 
-        binding.viewpagerSlider.beginFakeDrag() //sahte bir sürükleme işlemini başlatır.
-        binding.viewpagerSlider.fakeDragBy(-10f) //belirli bir mesafe kadar sürüklemeyi sağlar.
-        binding.viewpagerSlider.endFakeDrag()
+//        binding.viewpagerSlider.beginFakeDrag() //sahte bir sürükleme işlemini başlatır.
+//        binding.viewpagerSlider.fakeDragBy(-10f) //belirli bir mesafe kadar sürüklemeyi sağlar.
+//        binding.viewpagerSlider.endFakeDrag()
 
     }
 
