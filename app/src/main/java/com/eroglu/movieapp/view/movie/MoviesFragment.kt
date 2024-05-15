@@ -35,12 +35,12 @@ class MoviesFragment : Fragment() {
         binding.lifecycleOwner = this
         observe()
 
-        val images = listOf(
-            R.drawable.wide,
-            R.drawable.wide1,
-            R.drawable.wide3,
-            R.drawable.pikachu1,
-        )
+//        val images = listOf(
+//            R.drawable.wide,
+//            R.drawable.wide1,
+//            R.drawable.wide3,
+//            R.drawable.pikachu1,
+//        )
 
 //        val adapter = ViewPagerAdapter(images)
 //        binding.viewpager2Slider.adapter = adapter

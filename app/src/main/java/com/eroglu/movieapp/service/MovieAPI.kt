@@ -4,6 +4,7 @@ import com.eroglu.movieapp.model.movies.MovieDetails
 import com.eroglu.movieapp.model.movies.PopularMovies
 import com.eroglu.movieapp.model.movies.TopRated
 import com.eroglu.movieapp.model.movies.UpcommingMovies
+import com.eroglu.movieapp.model.tvSeries.TopRatedTv
 import com.eroglu.movieapp.model.tvSeries.TvSeriesAiringToday
 import com.eroglu.movieapp.model.tvSeries.TvSeriesDetail
 import com.eroglu.movieapp.model.tvSeries.TvSeriesPopular
@@ -50,5 +51,10 @@ interface MovieAPI {
     suspend fun getTopRatedMovies(
         @Query("api_key") apiKey: String = API_KEY
     ): Response<TopRated>
+
+    @GET("tv/top_rated")
+    suspend fun getTopRatedTvSeries(
+        @Query("api_key") apiKey: String = API_KEY
+    ): Response<TopRatedTv>
 
 }

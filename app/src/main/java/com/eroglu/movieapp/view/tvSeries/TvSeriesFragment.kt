@@ -35,20 +35,20 @@ class TvSeriesFragment : Fragment() {
         binding.lifecycleOwner = this
         observe()
 
-        val imagesTv = listOf(
-            R.drawable.pikachu1,
-            R.drawable.pikachu3,
-            R.drawable.pikachu5,
-            R.drawable.wide,
-            R.drawable.wide1,
-            R.drawable.wide3,
-
-        )
+//        val imagesTv = listOf(
+//            R.drawable.pikachu1,
+//            R.drawable.pikachu3,
+//            R.drawable.pikachu5,
+//            R.drawable.wide,
+//            R.drawable.wide1,
+//            R.drawable.wide3,
+//
+//        )
 
 //        val adapter = ViewPagerAdapter(imagesTv)
 //        binding.viewpagerSlider.adapter = adapter
 //        binding.viewpagerSlider.adapter = ViewPagerAdapter(imagesTv)
-//
+        binding.viewpagerSlider.adapter = viewModel.topRatedTvAdapter
 
 //        binding.viewpagerSlider.beginFakeDrag() //sahte bir sürükleme işlemini başlatır.
 //        binding.viewpagerSlider.fakeDragBy(-10f) //belirli bir mesafe kadar sürüklemeyi sağlar.

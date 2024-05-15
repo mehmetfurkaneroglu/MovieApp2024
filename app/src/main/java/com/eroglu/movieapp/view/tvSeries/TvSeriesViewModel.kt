@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.eroglu.movieapp.model.tvSeries.TVSeriesResult
 import com.eroglu.movieapp.service.Repository
 import com.eroglu.movieapp.util.SingleLiveEvent
+import com.eroglu.movieapp.view.detail.viewpager.ViewPagerItemClickedListenerTv
+import com.eroglu.movieapp.view.detail.viewpager.ViewPagerTvAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,6 +23,7 @@ class TvSeriesViewModel @Inject constructor(private val repository: Repository) 
     init {
         getPopularTvSeries()
         getAiringTodayTvSeries()
+        getTopRatedTvSeries()
     }
 
     val popularTvSeriesAdapter = TvSeriesAdapter().apply {
@@ -33,6 +36,14 @@ class TvSeriesViewModel @Inject constructor(private val repository: Repository) 
 
     val airingTodayTvSeriesAdapter = TvSeriesAdapter().apply {
         itemClickedListenerTv = object : ItemClickedListenerTv {
+            override fun onItemClickedTv(item: TVSeriesResult) {
+                selectedTvSeries.postValue(item)
+            }
+        }
+    }
+
+    val topRatedTvAdapter = ViewPagerTvAdapter().apply {
+        itemClickedListenerTv = object : ViewPagerItemClickedListenerTv {
             override fun onItemClickedTv(item: TVSeriesResult) {
                 selectedTvSeries.postValue(item)
             }
@@ -66,6 +77,19 @@ class TvSeriesViewModel @Inject constructor(private val repository: Repository) 
                         airingTodayTvSeriesAdapter.list = it
                     }
                     isAiringTodayLoading.value = false
+                }
+            }
+        }
+    }
+
+    private fun getTopRatedTvSeries(){
+        viewModelScope.launch {
+            val result = repository.getTopRatedTvSeries()
+            if (result.isSuccessful) {
+                result.body()?.let {
+                    it.results?.let {
+                        topRatedTvAdapter.viewPagerTvList = it
+                    }
                 }
             }
         }

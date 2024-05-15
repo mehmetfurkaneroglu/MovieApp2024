@@ -43,7 +43,7 @@ class ViewPagerAdapter: RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolde
     }
 
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
-        val curImage = viewPagerList[position]
+//        val curImage = viewPagerList[position]
 //        holder.binding.viewPagerImage.setImageResource(curImage)
         holder.binding.viewPagerText.text = viewPagerList[position]?.originalTitle
         Glide
