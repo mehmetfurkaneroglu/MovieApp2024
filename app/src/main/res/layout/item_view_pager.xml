@@ -13,6 +13,13 @@
         android:adjustViewBounds="false"
         android:minHeight="300dp"
         android:scaleType="centerCrop">
-
     </ImageView>
+    <TextView
+        android:id="@+id/viewPagerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/viewPagerImage"
+        />
+
 </androidx.cardview.widget.CardView>

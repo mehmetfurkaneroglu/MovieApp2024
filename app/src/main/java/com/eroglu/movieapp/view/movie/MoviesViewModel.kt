@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.eroglu.movieapp.model.movies.MovieResult
 import com.eroglu.movieapp.service.Repository
 import com.eroglu.movieapp.util.SingleLiveEvent
+import com.eroglu.movieapp.view.detail.viewpager.ViewPagerAdapter
+import com.eroglu.movieapp.view.detail.viewpager.ViewPagerItemClickedListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,6 +23,7 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
     init {
         getPopularMovies()
         getUpcomingMovies()
+        getTopRatedMovies()
     }
 
     val moviesAdapter = MoviesAdapter().apply {
@@ -38,6 +41,16 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
             }
         }
     }
+
+    val topRatedAdapter = ViewPagerAdapter().apply {
+        itemClickedListener = object : ViewPagerItemClickedListener {
+            override fun onItemClicked(item: MovieResult) {
+                selectedMovie.postValue(item)
+            }
+        }
+    }
+
+
 
     private fun getPopularMovies() {
         viewModelScope.launch {
@@ -72,4 +85,19 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
             }
         }
     }
+
+    private fun getTopRatedMovies(){
+        viewModelScope.launch {
+            val result = repository.getTopRatedMovies()
+            if (result.isSuccessful) {
+                result.body()?.let {
+                    it.results?.let {
+                        topRatedAdapter.viewPagerList = it
+                    }
+                }
+            }
+        }
+    }
+
+
 }

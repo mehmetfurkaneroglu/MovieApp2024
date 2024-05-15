@@ -2,6 +2,7 @@ package com.eroglu.movieapp.service
 
 import com.eroglu.movieapp.model.movies.MovieDetails
 import com.eroglu.movieapp.model.movies.PopularMovies
+import com.eroglu.movieapp.model.movies.TopRated
 import com.eroglu.movieapp.model.movies.UpcommingMovies
 import com.eroglu.movieapp.model.tvSeries.TvSeriesAiringToday
 import com.eroglu.movieapp.model.tvSeries.TvSeriesDetail
@@ -44,5 +45,10 @@ interface MovieAPI {
         @Path("id") id: String,
         @Query("api_key") apiKey: String = API_KEY
     ): Response<TvSeriesDetail>
+
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovies(
+        @Query("api_key") apiKey: String = API_KEY
+    ): Response<TopRated>
 
 }

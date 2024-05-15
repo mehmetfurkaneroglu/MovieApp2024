@@ -12,7 +12,6 @@ import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.FragmentTvSeriesBinding
 import com.eroglu.movieapp.model.tvSeries.TVSeriesResult
 import com.eroglu.movieapp.util.Keys
-import com.eroglu.movieapp.view.detail.viewpager.ViewPagerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -48,7 +47,8 @@ class TvSeriesFragment : Fragment() {
 
 //        val adapter = ViewPagerAdapter(imagesTv)
 //        binding.viewpagerSlider.adapter = adapter
-        binding.viewpagerSlider.adapter = ViewPagerAdapter(imagesTv)
+//        binding.viewpagerSlider.adapter = ViewPagerAdapter(imagesTv)
+//
 
 //        binding.viewpagerSlider.beginFakeDrag() //sahte bir sürükleme işlemini başlatır.
 //        binding.viewpagerSlider.fakeDragBy(-10f) //belirli bir mesafe kadar sürüklemeyi sağlar.
