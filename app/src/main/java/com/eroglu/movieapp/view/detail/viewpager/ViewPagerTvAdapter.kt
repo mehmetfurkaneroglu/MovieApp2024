@@ -42,7 +42,8 @@ class ViewPagerTvAdapter: RecyclerView.Adapter<ViewPagerTvAdapter.ViewPagerTvVie
     }
 
     override fun onBindViewHolder(holder: ViewPagerTvViewHolder, position: Int) {
-        holder.binding.viewPagerText.text = viewPagerTvList[position]?.originalName
+//        holder.binding.viewPagerText.text = viewPagerTvList[position]?.originalName
+        holder.binding.viewPagerText.text = viewPagerTvList[position]?.name
         Glide
             .with(holder.binding.root.context)
             .load("${Constants.IMAGE_BASE_URL}${viewPagerTvList[position]?.backdropPath}")

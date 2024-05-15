@@ -45,7 +45,8 @@ class ViewPagerAdapter: RecyclerView.Adapter<ViewPagerAdapter.ViewPagerViewHolde
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
 //        val curImage = viewPagerList[position]
 //        holder.binding.viewPagerImage.setImageResource(curImage)
-        holder.binding.viewPagerText.text = viewPagerList[position]?.originalTitle
+//        holder.binding.viewPagerText.text = viewPagerList[position]?.originalTitle
+        holder.binding.viewPagerText.text = viewPagerList[position]?.title
         Glide
             .with(holder.binding.root.context)
             .load("${IMAGE_BASE_URL}${viewPagerList[position]?.backdropPath}")
