@@ -1,7 +1,7 @@
-package com.eroglu.movieapp.view.favorite
+package com.eroglu.movieapp.model
 
-data class FavoriteModel(
-    val itemId: String? = "",
+data class CommonModel(
+    val itemId: Int? = 0,
     val itemName: String? = "",
     val itemPicture: String? = "",
     val itemType: FavoriteItemTypeEnum? = FavoriteItemTypeEnum.MOVIES

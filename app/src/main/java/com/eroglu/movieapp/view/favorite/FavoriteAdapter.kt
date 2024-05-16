@@ -10,30 +10,32 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.FavoriteItemBinding
+import com.eroglu.movieapp.model.CommonModel
+import com.eroglu.movieapp.model.FavoriteItemTypeEnum
 
-interface ItemClickedListener {
-    fun onItemClicked(favoriteModel: FavoriteModel)
+interface FavoriteItemClickedListener {
+    fun onItemClicked(commonModel: CommonModel)
 }
 
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
-    var itemClickedListener: ItemClickedListener? = null
+    var itemClickedListener: FavoriteItemClickedListener? = null
 
     inner class FavoriteViewHolder(val binding: FavoriteItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val diffUtil = object : DiffUtil.ItemCallback<FavoriteModel>() {
-        override fun areItemsTheSame(oldItem: FavoriteModel, newItem: FavoriteModel) =
+    private val diffUtil = object : DiffUtil.ItemCallback<CommonModel>() {
+        override fun areItemsTheSame(oldItem: CommonModel, newItem: CommonModel) =
             oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: FavoriteModel, newItem: FavoriteModel) =
+        override fun areContentsTheSame(oldItem: CommonModel, newItem: CommonModel) =
             oldItem == newItem
 
     }
 
     private val listDiffer = AsyncListDiffer(this, diffUtil)
-    var favoriteList: List<FavoriteModel>
+    var favoriteList: List<CommonModel>
         get() = listDiffer.currentList
         set(value) = listDiffer.submitList(value)
 

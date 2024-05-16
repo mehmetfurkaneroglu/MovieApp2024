@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="callBack"
+            type="com.eroglu.movieapp.view.tvSeries.ItemClickedListener" />
+        <variable
+            name="data"
+            type="com.eroglu.movieapp.model.CommonModel" />
+    </data>
+
+
+<androidx.cardview.widget.CardView
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="20dp"
+    android:onClick="@{() -> callBack.onItemClicked(data.itemId)}">
 
     <ImageView
         android:id="@+id/viewPagerImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="false"
+        loadImage="@{data.itemPicture}"
         android:minHeight="300dp"
         android:scaleType="centerCrop">
     </ImageView>
@@ -19,8 +34,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
+        android:text="@{data.itemName}"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:background="@color/orange"/>
 
 </androidx.cardview.widget.CardView>
+</layout>

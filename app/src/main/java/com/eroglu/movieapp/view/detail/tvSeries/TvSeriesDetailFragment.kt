@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.eroglu.movieapp.BR
 import com.eroglu.movieapp.databinding.FragmentTvSeriesDetailBinding
+import com.eroglu.movieapp.model.FavoriteItemTypeEnum
 import com.eroglu.movieapp.util.Keys
-import com.eroglu.movieapp.view.favorite.FavoriteItemTypeEnum
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -48,7 +48,7 @@ class TvSeriesDetailFragment : Fragment() {
 
         var database = FirebaseDatabase.getInstance().reference
         binding.favoriteImageView.setOnClickListener {
-            var itemId = viewModel.selectedTvSeriesDetail.value?.id.toString()
+            var itemId = viewModel.selectedTvSeriesDetail.value?.id?:0
             var itemName = viewModel.selectedTvSeriesDetail.value?.name
             var itemPicture = viewModel.selectedTvSeriesDetail.value?.posterPath
 
@@ -62,7 +62,7 @@ class TvSeriesDetailFragment : Fragment() {
                 .child("users")
                 .child(Firebase.auth.currentUser?.uid.toString())
                 .child("favorite_tv_series")
-                .child(itemId)
+                .child(itemId.toString())
                 .setValue(itemInfo)
 
         }

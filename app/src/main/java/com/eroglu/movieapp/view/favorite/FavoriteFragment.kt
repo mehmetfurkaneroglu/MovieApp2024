@@ -10,6 +10,8 @@ import androidx.navigation.Navigation
 import com.eroglu.movieapp.BR
 import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.FragmentFavoriteBinding
+import com.eroglu.movieapp.model.CommonModel
+import com.eroglu.movieapp.model.FavoriteItemTypeEnum
 import com.eroglu.movieapp.util.Keys
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -85,12 +87,12 @@ class FavoriteFragment : Fragment() {
         movieDatabase = FirebaseDatabase.getInstance().reference.child("users").child(currentUserUid ?: "").child("favorite_movies")
         movieDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val a = arrayListOf<FavoriteModel>()
+                val a = arrayListOf<CommonModel>()
 
                 for (data in snapshot.children) {
-                    val favoriteModel: FavoriteModel? = data.getValue(FavoriteModel::class.java)
-                    favoriteModel?.let {
-                        a.add(favoriteModel)
+                    val commonModel: CommonModel? = data.getValue(CommonModel::class.java)
+                    commonModel?.let {
+                        a.add(commonModel)
                     }
                 }
                 viewModel.favoriteMovieAdapter.favoriteList = a
@@ -105,11 +107,11 @@ class FavoriteFragment : Fragment() {
         tvSeriesDatabase = FirebaseDatabase.getInstance().reference.child("users").child(currentUserUid ?: "").child("favorite_tv_series")
         tvSeriesDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val a = arrayListOf<FavoriteModel>()
+                val a = arrayListOf<CommonModel>()
                 for (data in snapshot.children) {
-                    val favoriteModel: FavoriteModel? = data.getValue(FavoriteModel::class.java)
-                    favoriteModel?.let {
-                        a.add(favoriteModel)
+                    val commonModel: CommonModel? = data.getValue(CommonModel::class.java)
+                    commonModel?.let {
+                        a.add(commonModel)
                     }
                 }
                 viewModel.favoriteTvSeriesAdapter.favoriteList = a

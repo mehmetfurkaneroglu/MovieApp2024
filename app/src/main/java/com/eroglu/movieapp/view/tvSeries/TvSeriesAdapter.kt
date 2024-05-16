@@ -11,12 +11,9 @@ import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.TvSeriesItemBinding
 import com.eroglu.movieapp.model.tvSeries.TVSeriesResult
 
-interface ItemClickedListenerTv {
-    fun onItemClickedTv(item: TVSeriesResult)
-}
 class TvSeriesAdapter: RecyclerView.Adapter<TvSeriesAdapter.ViewHolder>() {
 
-    var itemClickedListenerTv: ItemClickedListenerTv? = null
+    var itemClickedListenerTv: ItemClickedListener? = null
 
     inner class ViewHolder(val binding: TvSeriesItemBinding): RecyclerView.ViewHolder(binding.root)
 

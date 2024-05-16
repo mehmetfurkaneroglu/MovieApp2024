@@ -3,11 +3,12 @@ package com.eroglu.movieapp.view.movie
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eroglu.movieapp.model.movies.MovieResult
+import com.eroglu.movieapp.model.CommonModel
+import com.eroglu.movieapp.model.FavoriteItemTypeEnum
 import com.eroglu.movieapp.service.Repository
 import com.eroglu.movieapp.util.SingleLiveEvent
 import com.eroglu.movieapp.view.detail.viewpager.ViewPagerAdapter
-import com.eroglu.movieapp.view.detail.viewpager.ViewPagerItemClickedListener
+import com.eroglu.movieapp.view.tvSeries.ItemClickedListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,7 +19,7 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
     var isPopularLoading = MutableLiveData(false)
     var isUpcomingLoading = MutableLiveData(false)
 
-    val selectedMovie = SingleLiveEvent<MovieResult>()
+    val selectedMovie = SingleLiveEvent<Int>()
 
     init {
         getPopularMovies()
@@ -28,7 +29,7 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
 
     val moviesAdapter = MoviesAdapter().apply {
         itemClickedListener = object : ItemClickedListener {
-            override fun onItemClicked(item: MovieResult) {
+            override fun onItemClicked(item: Int) {
                 selectedMovie.postValue(item)
             }
         }
@@ -36,15 +37,15 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
 
     val upcomingMoviesAdapter = MoviesAdapter().apply {
         itemClickedListener = object : ItemClickedListener {
-            override fun onItemClicked(item: MovieResult) {
+            override fun onItemClicked(item: Int) {
                 selectedMovie.postValue(item)
             }
         }
     }
 
     val topRatedAdapter = ViewPagerAdapter().apply {
-        itemClickedListener = object : ViewPagerItemClickedListener {
-            override fun onItemClicked(item: MovieResult) {
+        itemClickedListener = object : ItemClickedListener {
+            override fun onItemClicked(item: Int) {
                 selectedMovie.postValue(item)
             }
         }
@@ -92,7 +93,17 @@ class MoviesViewModel @Inject constructor(private val repository: Repository) : 
             if (result.isSuccessful) {
                 result.body()?.let {
                     it.results?.let {
-                        topRatedAdapter.viewPagerList = it
+                        val a = arrayListOf<CommonModel>()
+                        it.forEach{
+                            a.add(
+                                CommonModel(
+                                    itemId = it?.id,
+                                    itemName = it?.title,
+                                    itemPicture = it?.posterPath,
+                                    itemType = FavoriteItemTypeEnum.TV_SERIES)
+                            )
+                        }
+                        topRatedAdapter.list= a
                     }
                 }
             }
