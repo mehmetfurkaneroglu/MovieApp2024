@@ -31,6 +31,8 @@ class FavoriteViewModel @Inject constructor(private val repository: Repository) 
     }
 
     val adapter = MutableLiveData<FavoriteAdapter>(favoriteMovieAdapter)
+    val adapterMovie = MutableLiveData<FavoriteAdapter>(favoriteMovieAdapter)
+    val adapterTv = MutableLiveData<FavoriteAdapter>(favoriteTvSeriesAdapter)
 
 
 

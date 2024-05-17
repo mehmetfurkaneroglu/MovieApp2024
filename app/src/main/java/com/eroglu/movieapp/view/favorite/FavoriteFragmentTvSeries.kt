@@ -5,32 +5,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import com.eroglu.movieapp.databinding.FragmentFavoriteBinding
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import com.eroglu.movieapp.BR
+import com.eroglu.movieapp.R
+import com.eroglu.movieapp.databinding.FragmentFavoriteTvSeriesBinding
+import com.eroglu.movieapp.model.CommonModel
+import com.eroglu.movieapp.model.FavoriteItemTypeEnum
+import com.eroglu.movieapp.util.Keys
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FavoriteFragment : Fragment() {
+class FavoriteFragmentTvSeries : Fragment() {
 
 //    private lateinit var favoriteRecyclerView: RecyclerView
 //    private lateinit var favoriteAdapter: FavoriteAdapter
 //    private val favoriteList: MutableList<FavoriteModel> = mutableListOf()
-    /*
     private val viewModel: FavoriteViewModel by viewModels()
 
 
     private lateinit var movieDatabase: DatabaseReference
     private lateinit var tvSeriesDatabase: DatabaseReference
-    private var _binding: FragmentFavoriteBinding? = null
+    private var _binding: FragmentFavoriteTvSeriesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteTvSeriesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -61,38 +71,38 @@ class FavoriteFragment : Fragment() {
 
         getDataFromFirebase()
 
-        binding.moviesTextview.setOnClickListener{
-            viewModel.adapter.postValue(viewModel.favoriteMovieAdapter)
-        }
+//        binding.moviesTextview.setOnClickListener{
+//            viewModel.adapter.postValue(viewModel.favoriteMovieAdapter)
+//        }
 
-        binding.tvSeriesTextview.setOnClickListener{
-            viewModel.adapter.postValue(viewModel.favoriteTvSeriesAdapter)
-        }
+//        binding.tvSeriesTextview.setOnClickListener{
+//            viewModel.adapterTv.postValue(viewModel.favoriteTvSeriesAdapter)
+//        }
 
     }
 
     fun getDataFromFirebase(){
         val currentUserUid = Firebase.auth.currentUser?.uid
 
-        movieDatabase = FirebaseDatabase.getInstance().reference.child("users").child(currentUserUid ?: "").child("favorite_movies")
-        movieDatabase.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val a = arrayListOf<CommonModel>()
-
-                for (data in snapshot.children) {
-                    val commonModel: CommonModel? = data.getValue(CommonModel::class.java)
-                    commonModel?.let {
-                        a.add(commonModel)
-                    }
-                }
-                viewModel.favoriteMovieAdapter.favoriteList = a
-//                viewModel.favoriteAdapter.notifyDataSetChanged()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Handle error
-            }
-        })
+//        movieDatabase = FirebaseDatabase.getInstance().reference.child("users").child(currentUserUid ?: "").child("favorite_movies")
+//        movieDatabase.addValueEventListener(object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                val a = arrayListOf<CommonModel>()
+//
+//                for (data in snapshot.children) {
+//                    val commonModel: CommonModel? = data.getValue(CommonModel::class.java)
+//                    commonModel?.let {
+//                        a.add(commonModel)
+//                    }
+//                }
+//                viewModel.favoriteMovieAdapter.favoriteList = a
+////                viewModel.favoriteAdapter.notifyDataSetChanged()
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                // Handle error
+//            }
+//        })
 
         tvSeriesDatabase = FirebaseDatabase.getInstance().reference.child("users").child(currentUserUid ?: "").child("favorite_tv_series")
         tvSeriesDatabase.addValueEventListener(object : ValueEventListener {
@@ -118,34 +128,4 @@ class FavoriteFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-     */
-    private var _binding: FragmentFavoriteBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val mViewPager: ViewPager2 = binding.viewPager
-        val mTabLayout: TabLayout = binding.tabLayout
-
-        mViewPager.adapter = FavoriteViewPagerAdapter(this)
-        TabLayoutMediator(mTabLayout, mViewPager) { tab, position ->
-            when (position) {
-                0 -> tab.text = "Movies"
-                1 -> tab.text = "Tv Series"
-                else -> null
-            }
-        }.attach()
-    }
-
-
 }
