@@ -52,11 +52,13 @@ class MoviesDetailFragment : Fragment() {
             var itemId = detailViewModel.selectedMovieDetail.value?.id?:0
             var itemName = detailViewModel.selectedMovieDetail.value?.originalTitle
             var itemPicture = detailViewModel.selectedMovieDetail.value?.posterPath
+            var itemImdb = detailViewModel.selectedMovieDetail.value?.voteAverage?:0.0
 
             val itemInfo = HashMap<String, Any>()
             itemInfo["itemName"] = itemName!!
             itemInfo["itemPicture"] = itemPicture!!
             itemInfo["itemId"] = itemId
+            itemInfo["itemImdb"] = itemImdb
             itemInfo["itemType"] = FavoriteItemTypeEnum.MOVIES
 
             database

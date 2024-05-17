@@ -35,9 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:text="@{data.itemName}"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:background="@color/orange"/>
+        android:textSize="16sp"
+        android:textColor="@color/yellow"
+        android:textStyle="bold"/>
 
 </androidx.cardview.widget.CardView>
 </layout>
