@@ -10,8 +10,8 @@ import androidx.navigation.Navigation
 import com.eroglu.movieapp.BR
 import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.FragmentMoviesBinding
-import com.eroglu.movieapp.model.movies.MovieResult
 import com.eroglu.movieapp.util.Keys
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,6 +46,11 @@ class MoviesFragment : Fragment() {
 //        binding.viewpager2Slider.adapter = adapter
         binding.viewpager2Slider.adapter = viewModel.topRatedAdapter
 
+
+        TabLayoutMediator(binding.intoTabLayout, binding.viewpager2Slider) { tab, position ->
+        }.attach() //The Magical Line
+
+
 //        binding.viewpager2Slider.beginFakeDrag() //sahte bir sürükleme işlemini başlatır.
 //        binding.viewpager2Slider.fakeDragBy(-10f) //belirli bir mesafe kadar sürüklemeyi sağlar.
 //        binding.viewpager2Slider.endFakeDrag()
@@ -60,9 +65,9 @@ class MoviesFragment : Fragment() {
         }
     }
 
-    private fun navigateToMovieDetail(movie: MovieResult){
+    private fun navigateToMovieDetail(movie: Int){
         val bundle = Bundle().apply {
-            putInt(Keys.MOVIE_DETAIL_KEY,movie.id?:0)
+            putInt(Keys.MOVIE_DETAIL_KEY,movie)
         }
 
         Navigation.findNavController(requireActivity(), R.id.fragmentContainerView)

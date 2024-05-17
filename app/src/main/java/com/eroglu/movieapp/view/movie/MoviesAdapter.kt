@@ -10,10 +10,8 @@ import com.eroglu.movieapp.BR
 import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.PopularMoviesItemBinding
 import com.eroglu.movieapp.model.movies.MovieResult
+import com.eroglu.movieapp.view.tvSeries.ItemClickedListener
 
-interface ItemClickedListener{
-    fun onItemClicked(item: MovieResult)
-}
 
 class MoviesAdapter: RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 

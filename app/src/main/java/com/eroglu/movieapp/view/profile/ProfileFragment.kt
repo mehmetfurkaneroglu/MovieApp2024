@@ -27,12 +27,19 @@ class ProfileFragment : Fragment() {
 
  */
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.eroglu.movieapp.databinding.FragmentProfileBinding
+import com.eroglu.movieapp.util.Constants.DATABASE_NAME
+import com.eroglu.movieapp.util.Keys.HAS_ACTIVE_USER
+import com.eroglu.movieapp.view.OnboardingActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class ProfileFragment : Fragment() {
 
@@ -58,10 +65,22 @@ class ProfileFragment : Fragment() {
 //        // Kullanıcı bilgilerini TextView'lere ata
 //        binding.tvEmail.text = "$email"
 //        binding.tvPassword.text = "$password"
+        binding.btnLogout.setOnClickListener {
+                Firebase.auth.signOut()
+            val intent = Intent(requireActivity(), OnboardingActivity::class.java)
+            requireContext().getSharedPreferences(DATABASE_NAME, Context.MODE_PRIVATE).edit().remove(HAS_ACTIVE_USER).apply()
+//            requireContext().getSharedPreferences(DATABASE_NAME, Context.MODE_PRIVATE).edit().clear().apply() // tüm hepsini siler.
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+
+        }
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

@@ -2,38 +2,38 @@ package com.eroglu.movieapp.view.favorite
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.eroglu.movieapp.R
 import com.eroglu.movieapp.databinding.FavoriteItemBinding
+import com.eroglu.movieapp.model.CommonModel
+import com.eroglu.movieapp.model.FavoriteItemTypeEnum
 
-interface ItemClickedListener {
-    fun onItemClicked(favoriteModel: FavoriteModel)
+interface FavoriteItemClickedListener {
+    fun onItemClicked(commonModel: CommonModel)
 }
 
 
 class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
-    var itemClickedListener: ItemClickedListener? = null
+    var itemClickedListener: FavoriteItemClickedListener? = null
 
     inner class FavoriteViewHolder(val binding: FavoriteItemBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val diffUtil = object : DiffUtil.ItemCallback<FavoriteModel>() {
-        override fun areItemsTheSame(oldItem: FavoriteModel, newItem: FavoriteModel) =
+    private val diffUtil = object : DiffUtil.ItemCallback<CommonModel>() {
+        override fun areItemsTheSame(oldItem: CommonModel, newItem: CommonModel) =
             oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: FavoriteModel, newItem: FavoriteModel) =
+        override fun areContentsTheSame(oldItem: CommonModel, newItem: CommonModel) =
             oldItem == newItem
 
     }
 
     private val listDiffer = AsyncListDiffer(this, diffUtil)
-    var favoriteList: List<FavoriteModel>
+    var favoriteList: List<CommonModel>
         get() = listDiffer.currentList
         set(value) = listDiffer.submitList(value)
 
@@ -51,6 +51,7 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
         val currentItem = favoriteList[position]
 
         holder.binding.tvTitle.text = currentItem.itemName
+        holder.binding.tvImdb.text = currentItem.itemImdb.toString()
         Glide.with(holder.itemView)
             .load("https://image.tmdb.org/t/p/w500${currentItem.itemPicture}")
             .apply(RequestOptions().centerCrop())
@@ -58,10 +59,10 @@ class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>
 
         when(currentItem.itemType){
             FavoriteItemTypeEnum.MOVIES ->{
-                holder.binding.constraintLayout.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.c1))
+//                holder.binding.constraintLayout.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.c1))
             }
             FavoriteItemTypeEnum.TV_SERIES ->{
-                holder.binding.constraintLayout.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.c2))
+//                holder.binding.constraintLayout.setBackgroundColor(ContextCompat.getColor(holder.itemView.context,R.color.c2))
             }
             else -> {}
         }

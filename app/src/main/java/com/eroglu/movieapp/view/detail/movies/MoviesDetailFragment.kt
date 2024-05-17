@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.eroglu.movieapp.BR
 import com.eroglu.movieapp.databinding.FragmentDetailBinding
+import com.eroglu.movieapp.model.FavoriteItemTypeEnum
 import com.eroglu.movieapp.util.Keys
-import com.eroglu.movieapp.view.favorite.FavoriteItemTypeEnum
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.database.FirebaseDatabase
@@ -49,21 +49,23 @@ class MoviesDetailFragment : Fragment() {
         var database = FirebaseDatabase.getInstance().reference
         //Veri ekleme işlemi
         binding.favoriteImageView.setOnClickListener {
-            var itemId = detailViewModel.selectedMovieDetail.value?.id.toString()
+            var itemId = detailViewModel.selectedMovieDetail.value?.id?:0
             var itemName = detailViewModel.selectedMovieDetail.value?.originalTitle
             var itemPicture = detailViewModel.selectedMovieDetail.value?.posterPath
+            var itemImdb = detailViewModel.selectedMovieDetail.value?.voteAverage?:0.0
 
             val itemInfo = HashMap<String, Any>()
             itemInfo["itemName"] = itemName!!
             itemInfo["itemPicture"] = itemPicture!!
             itemInfo["itemId"] = itemId
+            itemInfo["itemImdb"] = itemImdb
             itemInfo["itemType"] = FavoriteItemTypeEnum.MOVIES
 
             database
                 .child("users")
                 .child(Firebase.auth.currentUser?.uid.toString())
                 .child("favorite_movies")
-                .child(itemId)
+                .child(itemId.toString())
                 .setValue(itemInfo)
         }
     }
